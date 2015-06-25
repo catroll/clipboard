@@ -3,3 +3,10 @@
 Session.vim
 .netrwhist
 *~
+
+.idea
+*.bak
+*.img
+*.tmp
+*.log
+
