@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 """
 未验证：使用Python快速实现显示器关闭和锁住桌面
 
