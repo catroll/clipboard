@@ -9,4 +9,4 @@ Session.vim
 *.img
 *.tmp
 *.log
-
+ignore*
