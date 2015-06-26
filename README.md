@@ -2,6 +2,11 @@
 
 粘贴板，临时记录一些代码片段或者其他咚咚
 
+## Nodes
+
+- [20150626-001.md](20150626-001.md)
+- [20150624-001.md](20150624-001.md)
+
 ## Snippets
 
 - [create_image.py](create_image.py)
@@ -28,7 +33,3 @@
                 - [**localisation/**](html/multiselect/js/plugins/localisation)
         - [**css/**](html/multiselect/css)
             - [common.css](html/multiselect/css/common.css)
-
-## Nodes
-
-- [20150624-001.md](20150624-001.md)

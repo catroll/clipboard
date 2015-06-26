@@ -97,12 +97,9 @@ class FileItem(PathItem):
         super(FileItem, self).__init__(*args, **kwargs)
         self.time = time_str(self.ctime)
 
-    def order(self):
-        return self.ctime
-
 
 class DirItem(PathItem, Items):
-    order = 3
+    order = 0
 
     def __init__(self, *args, **kwargs):
         super(DirItem, self).__init__(*args, **kwargs)
@@ -160,10 +157,10 @@ class Index(DirItem):
         return '\n\n'.join([
             '# %s' % self.basename,
             DESCRIPTION,
+            '## Nodes',
+            self.notes.render(),
             '## Snippets',
             Items.render(self),
-            '## Nodes',
-            self.notes.render()
         ]) + '\n'
 
 
