@@ -2,24 +2,23 @@
 # -*- coding: utf-8 -*-
 
 import os
-import sys
 import re
 import time
 import json
 
-
-ROOT = os.path.dirname(__file__)
+THIS = os.path.abspath(__file__)
+ROOT = os.path.dirname(THIS)
 join = lambda dirname, x: '%s/%s' % (dirname, x)
 _ = lambda x: join(ROOT, x)
 # _ = lambda x: os.path.join(ROOT, x)
 # join = os.path.join
-DESCRIPTION = u'粘贴板，临时记录一些代码片段或者其他咚咚'.encode('utf-8')  # sys.getfilesystemencoding()
+DESCRIPTION = u'粘贴板，临时记录一些代码片段或者其他咚咚'.encode('utf-8')
 PATTERN = re.compile('^[a-zA-Z0-9\-_]+(\.[a-z]+)?$')
 FILE_EXTS = ['', '.markdown', '.md', '.rst', '.txt', '.py', '.c', '.php', '.java', '.js', '.css']
 INDEX_FILE = _('README.md')
 IGNORE_FILES = ['README.md']
-IGNORE_PATHS = [INDEX_FILE, __file__, _('LICENSE')]
-BASE_URL = '../../blob/master/'
+IGNORE_PATHS = [INDEX_FILE, THIS, _('LICENSE')]
+BASE_URL = 'http://git.oschina.net/catroll/clipboard/blob/master'
 
 
 def ctime(path):
@@ -35,9 +34,6 @@ class Item(object):
         self.path = path
         self.depth = depth or 0
 
-    def name(self):
-        pass
-
     def url(self):
         pass
 
@@ -46,9 +42,6 @@ class Item(object):
 
     def __repr__(self):
         return '<%s %s>' % (self.__class__.__name__, repr(self.__dict__))
-
-    def title(self):
-        return self.basename
 
     def render(self):
         raise NotImplemented
@@ -74,28 +67,34 @@ class Items(Item):
 
 
 class PathItem(Item):
-    def __init__(self, path, depth=None):
+    def __init__(self, path, depth=None, base_url=None):
         super(PathItem, self).__init__(path, depth)
         # self.dirname = os.path.dirname(path)
         self.basename = os.path.basename(path)
+        self.base_url = base_url
         self.ctime = ctime(path)
 
-    def name(self):
+    def title(self):
         return self.basename
 
     def url(self):
-        return BASE_URL + self.basename
+        if self.base_url is None:
+            return self.basename
+        return '/'.join([self.base_url, self.basename])
 
     def order(self):
         return self.ctime
+
+    def raw_render(self):
+        return '%s- %s' % (' ' * 4 * (self.depth - 1), self.title())
 
     def render(self):
         return '%s- [%s](%s)' % (' ' * 4 * (self.depth - 1), self.title(), self.url())
 
 
 class FileItem(PathItem):
-    def __init__(self, path, depth=None):
-        super(FileItem, self).__init__(path, depth)
+    def __init__(self, *args, **kwargs):
+        super(FileItem, self).__init__(*args, **kwargs)
         self.time = time_str(self.ctime)
 
     def order(self):
@@ -105,8 +104,8 @@ class FileItem(PathItem):
 class DirItem(PathItem, Items):
     order = 3
 
-    def __init__(self, path, depth=None):
-        super(DirItem, self).__init__(path, depth)
+    def __init__(self, *args, **kwargs):
+        super(DirItem, self).__init__(*args, **kwargs)
         self.children = self.walk(self.path)
         self.sort()
 
@@ -120,9 +119,9 @@ class DirItem(PathItem, Items):
                 name, ext = os.path.splitext(i)
                 if ext not in FILE_EXTS:
                     continue
-                items.append(FileItem(path, depth=self.depth+1))
+                items.append(FileItem(path, depth=self.depth + 1, base_url=self.url()))
             elif os.path.isdir(path):
-                items.append(DirItem(path, depth=self.depth+1))
+                items.append(DirItem(path, depth=self.depth + 1, base_url=self.url()))
             else:
                 continue
         return items
@@ -131,6 +130,8 @@ class DirItem(PathItem, Items):
         return '**%s/**' % self.basename
 
     def render(self):
+        if not self.children:
+            return PathItem.render(self)
         return '\n'.join([PathItem.render(self), Items.render(self)])
 
 
@@ -146,11 +147,13 @@ class Index(DirItem):
         for i in self.notes:
             self.children.remove(i)
 
+    def url(self):
+        return self.base_url
+
     @classmethod
     def generate(cls):
-        if not os.path.exists(INDEX_FILE):
-            open(INDEX_FILE, 'w').close()
-        with open(INDEX_FILE, 'rU+') as f:
+        with open(INDEX_FILE, 'w') as f:
+            f.truncate()
             f.write(Index(ROOT).render())
 
     def render(self):
@@ -168,6 +171,7 @@ def test():
     def json_encoder(o):
         if isinstance(o, object):
             return o.__dict__
+
     print json.dumps(Index(ROOT), default=json_encoder, indent=4)
 
 
