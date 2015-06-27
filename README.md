@@ -4,6 +4,7 @@
 
 ## Nodes
 
+- [20150627-build-high-performance-linux-servers.md](20150627-build-high-performance-linux-servers.md)
 - [20150626-rabbitmq.md](20150626-rabbitmq.md)
 - [20150624-links.md](20150624-links.md)
 
