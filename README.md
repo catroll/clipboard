@@ -9,10 +9,16 @@
 
 ## Snippets
 
+- [lan_ping.py](lan_ping.py)
+- [aes.py](aes.py)
 - [create_image.py](create_image.py)
+- [lan_mac.py](lan_mac.py)
 - [lock.py](lock.py)
 - [**base64img/**](base64img)
     - [base64img.py](base64img/base64img.py)
+- [**images/**](images)
+    - [douban.py](images/douban.py)
+    - [jiandan.py](images/jiandan.py)
 - [**html/**](html)
     - [**page/**](html/page)
         - [css.css](html/page/css.css)
