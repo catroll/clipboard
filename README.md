@@ -23,3 +23,4 @@
 - [**network/**](network)
     - [lan_ping.py](network/lan_ping.py)
     - [lan_mac.py](network/lan_mac.py)
+    - [NetScan.py](network/NetScan.py)
