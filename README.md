@@ -9,10 +9,8 @@
 
 ## Snippets
 
-- [lan_ping.py](lan_ping.py)
 - [aes.py](aes.py)
 - [create_image.py](create_image.py)
-- [lan_mac.py](lan_mac.py)
 - [lock.py](lock.py)
 - [**base64img/**](base64img)
     - [base64img.py](base64img/base64img.py)
@@ -39,3 +37,6 @@
                 - [**localisation/**](html/multiselect/js/plugins/localisation)
         - [**css/**](html/multiselect/css)
             - [common.css](html/multiselect/css/common.css)
+- [**network/**](network)
+    - [lan_ping.py](network/lan_ping.py)
+    - [lan_mac.py](network/lan_mac.py)
