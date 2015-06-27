@@ -17,7 +17,7 @@ PATTERN = re.compile('^[a-zA-Z0-9\-_]+(\.[a-z]+)?$')
 FILE_EXTS = ['', '.markdown', '.md', '.rst', '.txt', '.py', '.c', '.php', '.java', '.js', '.css']
 INDEX_FILE = _('README.md')
 IGNORE_FILES = ['README.md']
-IGNORE_PATHS = [INDEX_FILE, THIS, _('LICENSE')]
+IGNORE_PATHS = [INDEX_FILE, THIS, _('LICENSE'), _('update')]
 BASE_URL = 'http://git.oschina.net/catroll/clipboard/blob/master'
 MAX_DEPTH = 2
 
