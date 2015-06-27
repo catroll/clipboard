@@ -19,10 +19,15 @@ INDEX_FILE = _('README.md')
 IGNORE_FILES = ['README.md']
 IGNORE_PATHS = [INDEX_FILE, THIS, _('LICENSE')]
 BASE_URL = 'http://git.oschina.net/catroll/clipboard/blob/master'
+MAX_DEPTH = 2
 
 
 def ctime(path):
     return os.path.getctime(path)
+
+
+def mtime(path):
+    return os.path.getmtime(path)
 
 
 def time_str(stamp):
@@ -73,6 +78,7 @@ class PathItem(Item):
         self.basename = os.path.basename(path)
         self.base_url = base_url
         self.ctime = ctime(path)
+        self.order = self.basename
 
     def title(self):
         return self.basename
@@ -81,9 +87,6 @@ class PathItem(Item):
         if self.base_url is None:
             return self.basename
         return '/'.join([self.base_url, self.basename])
-
-    def order(self):
-        return self.ctime
 
     def raw_render(self):
         return '%s- %s' % (' ' * 4 * (self.depth - 1), self.title())
@@ -99,11 +102,11 @@ class FileItem(PathItem):
 
 
 class DirItem(PathItem, Items):
-    order = 0
-
     def __init__(self, *args, **kwargs):
         super(DirItem, self).__init__(*args, **kwargs)
-        self.children = self.walk(self.path)
+        self.order = -1
+        if self.depth < MAX_DEPTH:
+            self.children = self.walk(self.path)
         self.sort()
 
     def walk(self, base_path):
