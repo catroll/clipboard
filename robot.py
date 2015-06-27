@@ -133,7 +133,7 @@ class DirItem(PathItem, Items):
 
 
 class Index(DirItem):
-    NOTE_PATTERN = re.compile('^\d{8}-\d{3}\.md$')
+    NOTE_PATTERN = re.compile('^\d{8}-.+\.md$')
 
     def __init__(self, path, depth=None):
         super(Index, self).__init__(path, depth)
