@@ -10,6 +10,7 @@
 
 ## Snippets
 
+- [string_format.py](string_format.py)
 - [lock.py](lock.py)
 - [create_image.py](create_image.py)
 - [aes.py](aes.py)
