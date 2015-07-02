@@ -4,6 +4,7 @@
 
 ## Nodes
 
+- [20150702-links.md](20150702-links.md)
 - [20150630-vois-sur-ton-chemin.md](20150630-vois-sur-ton-chemin.md)
 - [20150627-build-high-performance-linux-servers.md](20150627-build-high-performance-linux-servers.md)
 - [20150626-rabbitmq.md](20150626-rabbitmq.md)
@@ -16,6 +17,7 @@
 - [search.py](search.py)
 - [lock.py](lock.py)
 - [create_image.py](create_image.py)
+- [classical_chinese.py](classical_chinese.py)
 - [aes.py](aes.py)
 - [TODO](TODO)
 - [**base64img/**](base64img)
