@@ -1,12 +1,20 @@
+### Vim ###
 *.s[a-w][a-z]
 *.un~
 Session.vim
 .netrwhist
 *~
 
+### Python ###
+*.py[cod]
+
+### PyCharm ###
 .idea
+
+### Project ###
 *.bak
 *.img
 *.tmp
 *.log
 ignore*
+
