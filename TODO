@@ -1,1 +1,6 @@
 1. 爬图 http://bbs.voc.com.cn/topic-5657926-1-1.html
+2. 加一个脚本，用于将 TabManger 生成的 url 转变成 markdown 文档，放在这个里面
+3. 将 marks 独立出来
+4. 将 exerise 独立出来
+
+
