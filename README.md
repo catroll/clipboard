@@ -16,6 +16,7 @@
 
 - [try-redis.md](try-redis.md)
 - [string_format.py](string_format.py)
+- [special-chars.md](special-chars.md)
 - [search.py](search.py)
 - [regular-expression-reference.md](regular-expression-reference.md)
 - [lock.py](lock.py)
