@@ -1,6 +1,6 @@
 #!/bin/bash
 python robot.py
 git add README.md
-git ci -m "Update README.md"
+git commit -m "Update README.md"
 git push origin -f && git push github -f
 
